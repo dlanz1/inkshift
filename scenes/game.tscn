@@ -168,6 +168,21 @@ texture = ExtResource("1_yqjtg")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 
+[sub_resource type="Animation" id="Animation_p57ef"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, -56)]
+}
+
 [sub_resource type="Animation" id="Animation_iywne"]
 resource_name = "move"
 length = 2.0
@@ -185,25 +200,25 @@ tracks/0/keys = {
 "values": [Vector2(256, -56), Vector2(304, -56)]
 }
 
-[sub_resource type="Animation" id="Animation_p57ef"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5sy4"]
+_data = {
+&"RESET": SubResource("Animation_p57ef"),
+&"move": SubResource("Animation_iywne")
+}
+
+[sub_resource type="Animation" id="Animation_lbhrr"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Platform3:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(256, -56)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5sy4"]
-_data = {
-&"RESET": SubResource("Animation_p57ef"),
-&"move": SubResource("Animation_iywne")
+"values": [Vector2(440, -56)]
 }
 
 [sub_resource type="Animation" id="Animation_lnu2h"]
@@ -221,21 +236,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(416, -56), Vector2(464, -56)]
-}
-
-[sub_resource type="Animation" id="Animation_lbhrr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Platform3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(440, -56)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iywne"]
