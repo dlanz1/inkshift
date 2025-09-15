@@ -1,16 +1,60 @@
-# Godot 4+ specific ignores
+### Godot 4 project ###
+# Project-local cache (never commit)
 .godot/
-.nomedia
 
-# Godot-specific ignores
+# Imported assets cache directory (keep per-asset .import files tracked)
 .import/
+
+# Export config: keep export_presets.cfg committed; ignore sensitive creds/legacy files
 export.cfg
 export_credentials.cfg
 
-# Imported translations (automatically generated from CSV files)
+# Generated from CSV translations
 *.translation
 
-# Mono-specific ignores
+# Common export/build output directories (adjust if you use a different folder)
+/export/
+/build/
+/dist/
+
+### C# / Mono (if used) ###
 .mono/
 data_*/
 mono_crash.*.json
+bin/
+obj/
+*.nupkg
+
+### IDE/editor ###
+.vscode/
+.idea/
+.vs/
+*.code-workspace
+*.suo
+*.user
+*.userosscache
+*.sln.iml
+
+### OS junk ###
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+### Logs and temp files ###
+*.log
+*.tmp
+*.temp
+*~
+~$*
+*.bak
+*.swp
+*.swo
+
+### Common exported package/binary artifacts (optional) ###
+*.exe
+*.apk
+*.aab
+*.ipa
+*.zip
+*.tar
+*.tar.gz
