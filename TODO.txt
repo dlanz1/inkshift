@@ -1,0 +1,1 @@
+replace notebook paper background to royalty-free one and implement infinite scrolling on it
