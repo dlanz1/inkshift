@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://7krqqipspjps"]
+[gd_scene load_steps=14 format=4 uid="uid://7krqqipspjps"]
 
 [ext_resource type="PackedScene" uid="uid://v1u6u7416ydt" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://boydp8ody8iec" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://q4853j0etbvs" path="res://scenes/platform.tscn" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://spwdqrf3sc5j" path="res://assets/images/notebook paper background.png" id="4_lbhrr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -244,6 +245,9 @@ _data = {
 &"move": SubResource("Animation_lnu2h")
 }
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
+distance = -176.0
+
 [node name="Game" type="Node2D"]
 
 [node name="Tilemap" type="TileMapLayer" parent="."]
@@ -289,3 +293,24 @@ position = Vector2(552, -152)
 
 [node name="Platform6" parent="." instance=ExtResource("3_lnu2h")]
 position = Vector2(616, -176)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.53, 0.53)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(372, -16)
+scale = Vector2(3.5, 1)
+texture = ExtResource("4_lbhrr")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="KillZone" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("WorldBoundaryShape2D_lbhrr")
+
+[connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
