@@ -5,11 +5,12 @@ const SPEED = 160.0
 const JUMP_VELOCITY = -255.0
 
 @onready var sprite = $AnimatedSprite2D
+@export var respawn_animation: AnimatedSprite2D
 
 var spawn_position: Vector2
 
 func _ready() -> void:
-	# set the initial spawn positionbto where the player is first placed in the level
+	# set the initial spawn position to where the player is first placed in the level
 	spawn_position = global_position
 
 func _physics_process(delta: float) -> void:
@@ -38,10 +39,29 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func respawn() -> void:
-	print("Player respawning!")
-	global_position = spawn_position
-	velocity = Vector2.ZERO
+	print("Player respawning! Playing animation...")
+	if respawn_animation:
+		var screen_size = get_viewport_rect().size
+		var texture_size = respawn_animation.sprite_frames.get_frame_texture("RespawnAnimation", 0).get_size()
+		respawn_animation.scale = screen_size / texture_size
+		respawn_animation.global_position = screen_size / 2.0
+		respawn_animation.visible = true
+		respawn_animation.play("RespawnAnimation")
+		self.hide()
 
+func _on_respawn_animation_finished() -> void:
+	print("Animation finished.")
+	if respawn_animation:
+		respawn_animation.visible = false
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	respawn()
+
+func _on_respawn_animation_frame_changed() -> void:
+	var teleport_frame = 18
+
+	if respawn_animation.frame == teleport_frame:
+		print("Teleport frame " + str(teleport_frame) + " reached. Moving player.")
+		global_position = spawn_position
+		velocity = Vector2.ZERO
+		self.show()
