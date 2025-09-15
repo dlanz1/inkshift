@@ -465,8 +465,8 @@ position = Vector2(616, -176)
 motion_scale = Vector2(0.53, 0.53)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(372, -16)
-scale = Vector2(3.5, 1)
+position = Vector2(372, 46)
+scale = Vector2(3.5, 1.20667)
 texture = ExtResource("4_lbhrr")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
