@@ -1,1 +1,6 @@
 replace notebook paper background to royalty-free one and implement infinite scrolling on it
+implement main menu/tutorial for controls
+ink/stick assets for player, background
+add sounds and bg music
+growing ink blob from the left that gradually speeds up so that player must continue in level quickly
+remove grey pixels from death animation (low priority)
