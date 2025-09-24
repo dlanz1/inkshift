@@ -54,7 +54,7 @@ func _on_respawn_animation_finished() -> void:
 	if respawn_animation:
 		respawn_animation.visible = false
 
-func _on_kill_zone_body_entered(body: Node2D) -> void:
+func _on_kill_zone_body_entered(_body: Node2D) -> void:
 	respawn()
 
 func _on_respawn_animation_frame_changed() -> void:
