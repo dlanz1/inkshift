@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal respawn_started
+signal respawn_finished
 
 const SPEED = 160.0
 const JUMP_VELOCITY = -255.0
@@ -40,6 +42,7 @@ func _physics_process(delta: float) -> void:
 
 func respawn() -> void:
 	print("Player respawning! Playing animation...")
+	respawn_started.emit()
 	if respawn_animation:
 		var screen_size = get_viewport_rect().size
 		var texture_size = respawn_animation.sprite_frames.get_frame_texture("RespawnAnimation", 0).get_size()
@@ -53,6 +56,7 @@ func _on_respawn_animation_finished() -> void:
 	print("Animation finished.")
 	if respawn_animation:
 		respawn_animation.visible = false
+	respawn_finished.emit()
 
 func _on_kill_zone_body_entered(_body: Node2D) -> void:
 	respawn()

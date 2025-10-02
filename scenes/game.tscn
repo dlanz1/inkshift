@@ -1,10 +1,9 @@
-[gd_scene load_steps=55 format=4 uid="uid://7krqqipspjps"]
+[gd_scene load_steps=56 format=4 uid="uid://7krqqipspjps"]
 
 [ext_resource type="PackedScene" uid="uid://v1u6u7416ydt" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://boydp8ody8iec" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://q4853j0etbvs" path="res://scenes/platform.tscn" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://spwdqrf3sc5j" path="res://assets/images/notebook paper background.png" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://cpualcehd2a81" path="res://scenes/blob.tscn" id="5_0sl42"]
 [ext_resource type="Texture2D" uid="uid://ckhrkqydfcavt" path="res://assets/images/deathblot/Timeline 1_00107892.png" id="5_05nbr"]
 [ext_resource type="Texture2D" uid="uid://ctbjetefybbnw" path="res://assets/images/deathblot/Timeline 1_00107893.png" id="6_0sl42"]
 [ext_resource type="Texture2D" uid="uid://cl6684aflav3q" path="res://assets/images/deathblot/Timeline 1_00107894.png" id="7_oaba0"]
@@ -44,6 +43,8 @@
 [ext_resource type="Texture2D" uid="uid://brqm4upcp3ukw" path="res://assets/images/deathblot/Timeline 1_00107928.png" id="41_2gnni"]
 [ext_resource type="Texture2D" uid="uid://ek1f0d6vdaqv" path="res://assets/images/deathblot/Timeline 1_00107929.png" id="42_vgxg3"]
 [ext_resource type="Texture2D" uid="uid://ck5torduiad3a" path="res://assets/images/deathblot/Timeline 1_00107930.png" id="43_4nbsr"]
+[ext_resource type="Script" uid="uid://cdci4466x0w0b" path="res://scenes/game.gd" id="44_cdci4"]
+[ext_resource type="PackedScene" uid="uid://cpualcehd2a81" path="res://scenes/blob.tscn" id="45_oaba0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -414,6 +415,7 @@ animations = [{
 }]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("44_cdci4")
 
 [node name="Tilemap" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -488,26 +490,29 @@ animation = &"RespawnAnimation"
 frame = 38
 frame_progress = 1.0
 
-[node name="Blob4" parent="." instance=ExtResource("5_0sl42")]
-position = Vector2(328, -115)
+[node name="Blob5" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(516, -162)
 
-[node name="Blob5" parent="." instance=ExtResource("5_0sl42")]
-position = Vector2(634, -221)
+[node name="Blob6" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(633, -223)
 
-[node name="Blob6" parent="." instance=ExtResource("5_0sl42")]
-position = Vector2(650, -240)
+[node name="Blob7" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(652, -237)
 
-[node name="Blob7" parent="." instance=ExtResource("5_0sl42")]
-position = Vector2(669, -222)
+[node name="Blob8" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(669, -223)
 
-[node name="Blob" parent="." instance=ExtResource("5_0sl42")]
-position = Vector2(111, -15)
+[node name="Blob" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(115, -66)
 
-[node name="Blob2" parent="." instance=ExtResource("5_0sl42")]
-position = Vector2(160, -15)
+[node name="Blob2" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(137, -83)
 
-[node name="Blob3" parent="." instance=ExtResource("5_0sl42")]
-position = Vector2(136, -15)
+[node name="Blob3" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(158, -65)
+
+[node name="Blob4" parent="." instance=ExtResource("45_oaba0")]
+position = Vector2(361, -112)
 
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
 [connection signal="animation_finished" from="CanvasLayer/RespawnAnimation" to="Player" method="_on_respawn_animation_finished"]
