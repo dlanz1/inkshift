@@ -4,6 +4,8 @@ const RESPAWN_GROUP := "respawnable_blob"
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var game_manager = %GameManager
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var _spawn_position: Vector2
 
@@ -16,6 +18,8 @@ func _ready() -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	_set_active(false)
+	game_manager.add_charge()
+	animation_player.play("PickupAnimation")
 
 
 func respawn() -> void:

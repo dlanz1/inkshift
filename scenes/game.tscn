@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=4 uid="uid://7krqqipspjps"]
+[gd_scene load_steps=60 format=4 uid="uid://7krqqipspjps"]
 
 [ext_resource type="PackedScene" uid="uid://v1u6u7416ydt" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://boydp8ody8iec" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://cdc4hd5poy154" path="res://scenes/game_manager.gd" id="2_h3rex"]
 [ext_resource type="PackedScene" uid="uid://q4853j0etbvs" path="res://scenes/platform.tscn" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://spwdqrf3sc5j" path="res://assets/images/notebook paper background.png" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://ckhrkqydfcavt" path="res://assets/images/deathblot/Timeline 1_00107892.png" id="5_05nbr"]
@@ -45,6 +46,9 @@
 [ext_resource type="Texture2D" uid="uid://ck5torduiad3a" path="res://assets/images/deathblot/Timeline 1_00107930.png" id="43_4nbsr"]
 [ext_resource type="Script" uid="uid://cdci4466x0w0b" path="res://scenes/game.gd" id="44_cdci4"]
 [ext_resource type="PackedScene" uid="uid://cpualcehd2a81" path="res://scenes/blob.tscn" id="45_oaba0"]
+[ext_resource type="FontFile" uid="uid://drifrp7tqglk2" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="46_458eo"]
+[ext_resource type="AudioStream" uid="uid://bssscdgbug323" path="res://assets/music/time_for_adventure.mp3" id="48_fedci"]
+[ext_resource type="Texture2D" uid="uid://du3ikk7egpvey" path="res://assets/images/IMG_0193.JPG" id="49_8qswn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -210,82 +214,6 @@ texture = ExtResource("1_yqjtg")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 
-[sub_resource type="Animation" id="Animation_p57ef"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(256, -56)]
-}
-
-[sub_resource type="Animation" id="Animation_iywne"]
-resource_name = "move"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(256, -56), Vector2(304, -56)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5sy4"]
-_data = {
-&"RESET": SubResource("Animation_p57ef"),
-&"move": SubResource("Animation_iywne")
-}
-
-[sub_resource type="Animation" id="Animation_lbhrr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Platform3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(440, -56)]
-}
-
-[sub_resource type="Animation" id="Animation_lnu2h"]
-resource_name = "move"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Platform3:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(416, -56), Vector2(464, -56)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iywne"]
-_data = {
-&"RESET": SubResource("Animation_lbhrr"),
-&"move": SubResource("Animation_lnu2h")
-}
-
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
 distance = -176.0
 
@@ -414,12 +342,103 @@ animations = [{
 "speed": 29.97
 }]
 
+[sub_resource type="Animation" id="Animation_p57ef"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, -56)]
+}
+
+[sub_resource type="Animation" id="Animation_iywne"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(256, -56), Vector2(304, -56)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5sy4"]
+_data = {
+&"RESET": SubResource("Animation_p57ef"),
+&"move": SubResource("Animation_iywne")
+}
+
+[sub_resource type="Animation" id="Animation_lbhrr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingPlatforms/Platform3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(440, -56)]
+}
+
+[sub_resource type="Animation" id="Animation_lnu2h"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingPlatforms/Platform3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(416, -56), Vector2(464, -56)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iywne"]
+_data = {
+&"RESET": SubResource("Animation_lbhrr"),
+&"move": SubResource("Animation_lnu2h")
+}
+
 [node name="Game" type="Node2D"]
 script = ExtResource("44_cdci4")
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_h3rex")
+
+[node name="ChargeLabel" type="Label" parent="GameManager"]
+offset_left = 1141.0
+offset_top = -201.0
+offset_right = 1331.0
+offset_bottom = -178.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("46_458eo")
+theme_override_font_sizes/font_size = 8
+text = "you collected x charge"
+autowrap_mode = 2
+
 [node name="Tilemap" type="TileMapLayer" parent="."]
 use_parent_material = true
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAD7/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAD+/wAAAAAAAAAAAAD6/wAAAAAAAAAAAAADAAAAAAAAAAEAAAAEAAAAAAAAAAEAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAFAP7/AAABAAEAAAAFAP//AAABAAEAAAAFAP3/AAABAAYAAAD3/wAAAAAAAAAAAAD4/wAAAAAAAAAAAAD5/wAAAAAAAAAAAAAHAAAAAAACAAEAAAAIAAAAAAACAAEAAAAJAAAAAAACAAEAAAALAP7/AAACAAEAAAAOAPz/AAACAAEAAAAGAAAAAAAJAAAAAAAKAAAAAAALAAAAAAALAP//AAACAAEAAAD4//z/AAACAAQAAAD4//7/AAADAAcAAAD4////AAADAAcAAAD8////AAADAAcAAAD8//3/AAACAAQAAAD6////AAAAAAUAAAD6//v/AAAAAAQAAAD6//z/AAAAAAQAAAD6//3/AAAAAAQAAAD6//7/AAAAAAQAAAD6//r/AAAAAAMAAAAMAP3/AAACAAEAAAAMAP7/AAACAAEAAAAMAP//AAACAAEAAAANAP3/AAACAAEAAAANAP7/AAACAAEAAAANAP//AAACAAEAAAAOAP3/AAACAAEAAAAOAP7/AAACAAEAAAAOAP//AAACAAEAAAAUAPz/AAACAAEAAAAVAPz/AAAJAAAAAAAWAPz/AAAKAAAAAAAXAPz/AAALAAAAAAAYAPz/AAACAAEAAAAeAPz/AAACAAEAAAD7////AAAIAAUAAAACAP//AAAIAAUAAAAqAPP/AAAEAAgAAAAqAPT/AAAGAAIAAAAtAPD/AAAFAAMAAAAtAPH/AAAFAAQAAAAuAPL/AAAFAAQAAAAuAPP/AAAFAAQAAAAvAPH/AAAFAAQAAAAvAPD/AAAFAAMAAAAxAPH/AAAFAAQAAAAxAPL/AAAFAAQAAAAxAPP/AAAFAAQAAAAzAPH/AAAFAAQAAAAzAPL/AAAFAAQAAAAzAPP/AAAFAAQAAAAyAPP/AAAFAAQAAAAyAPD/AAAFAAQAAAAxAPD/AAAFAAQAAAAzAPD/AAAFAAQAAAA1APD/AAAFAAQAAAA1APH/AAAFAAQAAAA1APL/AAAFAAQAAAA1APP/AAAFAAQAAAA2APP/AAAFAAQAAAA3APP/AAAFAAQAAAA3APD/AAAFAAQAAAA3APH/AAAFAAQAAAA3APL/AAAFAAQAAAAuAPf/AAAFAAQAAAAvAPj/AAAFAAQAAAAwAPf/AAAFAAQAAAAyAPX/AAAFAAQAAAAyAPb/AAAFAAQAAAAyAPf/AAAFAAQAAAA0APX/AAAFAAQAAAA0APb/AAAFAAQAAAA0APf/AAAFAAQAAAA0APj/AAAFAAQAAAA2APf/AAAFAAQAAAA3APb/AAAFAAQAAAAsAPX/AAAFAAQAAAAsAPb/AAAFAAQAAAAsAPf/AAAFAAQAAAAtAPj/AAAFAAQAAAAwAPX/AAAFAAQAAAAwAPb/AAAFAAQAAAAyAPj/AAAFAAQAAAA1APb/AAAFAAQAAAA3APX/AAAFAAQAAAA3APf/AAAFAAQAAAA3APj/AAAFAAQAAAA=")
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAD7/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD9/wAAAAAAAAAAAAD+/wAAAAAAAAAAAAD6/wAAAAAAAAAAAAADAAAAAAAAAAEAAAAEAAAAAAAAAAEAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAFAP7/AAABAAEAAAAFAP//AAABAAEAAAAFAP3/AAABAAYAAAD3/wAAAAAAAAAAAAD4/wAAAAAAAAAAAAD5/wAAAAAAAAAAAAAHAAAAAAACAAEAAAAIAAAAAAACAAEAAAAJAAAAAAACAAEAAAALAP7/AAACAAEAAAAOAPz/AAACAAEAAAAGAAAAAAAJAAAAAAAKAAAAAAALAAAAAAALAP//AAACAAEAAAD4//z/AAACAAQAAAD4//7/AAADAAcAAAD4////AAADAAcAAAD8////AAADAAcAAAD8//3/AAACAAQAAAD6////AAAAAAUAAAD6//v/AAAAAAQAAAD6//z/AAAAAAQAAAD6//3/AAAAAAQAAAD6//7/AAAAAAQAAAD6//r/AAAAAAMAAAAMAP3/AAACAAEAAAAMAP7/AAACAAEAAAAMAP//AAACAAEAAAANAP3/AAACAAEAAAANAP7/AAACAAEAAAANAP//AAACAAEAAAAOAP3/AAACAAEAAAAOAP7/AAACAAEAAAAOAP//AAACAAEAAAAUAPz/AAACAAEAAAAVAPz/AAAJAAAAAAAWAPz/AAAKAAAAAAAXAPz/AAALAAAAAAAYAPz/AAACAAEAAAAeAPz/AAACAAEAAAD7////AAAIAAUAAAACAP//AAAIAAUAAAAqAPP/AAAEAAgAAAAqAPT/AAAGAAIAAAArAPn/AAADAAAAAAArAPr/AAADAAAAAAArAPv/AAADAAAAAAAsAPz/AAADAAAAAAAsAP3/AAADAAAAAAAtAP3/AAADAAAAAAAtAP7/AAADAAAAAAAuAP7/AAADAAAAAAAvAP7/AAADAAAAAAAwAP7/AAADAAAAAAAxAP7/AAADAAAAAAA0APz/AAACAAAAAAA1APz/AAACAAAAAAA2APz/AAACAAAAAAA3APz/AAAJAAEAAAA4APz/AAAKAAEAAAA5APz/AAALAAEAAAA6APz/AAACAAIAAAA7APz/AAAJAAEAAAA8APz/AAAKAAEAAAA9APz/AAALAAEAAAA+APz/AAACAAIAAAA/APv/AAACAAIAAAA/APz/AAACAAEAAAAwAP3/AAAIAAMAAAA6APn/AAACAAEAAAA7APn/AAACAAEAAAA8APn/AAACAAEAAAA4APf/AAACAAEAAAA2APX/AAACAAEAAAA5APT/AAACAAEAAAA7APL/AAACAAEAAAA/APX/AAACAAEAAABAAPX/AAACAAEAAABBAPX/AAACAAEAAABCAPX/AAACAAEAAABDAPX/AAACAAEAAABEAPX/AAACAAEAAABFAPX/AAACAAEAAABGAPX/AAACAAEAAABHAPX/AAACAAEAAABIAPX/AAACAAEAAABJAPX/AAACAAEAAABKAPX/AAACAAEAAABLAPX/AAACAAEAAABMAPX/AAACAAEAAABNAPX/AAACAAEAAABOAPX/AAACAAEAAABPAPX/AAACAAEAAABQAPX/AAACAAEAAABRAPX/AAACAAEAAAA=")
 tile_set = SubResource("TileSet_lbhrr")
 
 [node name="Player" parent="." node_paths=PackedStringArray("respawn_animation") instance=ExtResource("1_uwrxv")]
@@ -430,46 +449,14 @@ position = Vector2(0, -41)
 zoom = Vector2(2.75, 2.75)
 position_smoothing_enabled = true
 
-[node name="Platform" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(488, -120)
-
-[node name="Platform2" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(256, -56)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform2"]
-libraries = {
-&"": SubResource("AnimationLibrary_u5sy4")
-}
-autoplay = "move"
-speed_scale = 0.712
-
-[node name="Platform3" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(440, -56)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform3"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_iywne")
-}
-autoplay = "move"
-
-[node name="Platform4" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(544, -96)
-
-[node name="Platform5" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(552, -152)
-
-[node name="Platform6" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(616, -176)
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.53, 0.53)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(372, 46)
-scale = Vector2(3.5, 1.20667)
+position = Vector2(714, 46)
+scale = Vector2(5.21, 1.20667)
 texture = ExtResource("4_lbhrr")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
@@ -490,29 +477,140 @@ animation = &"RespawnAnimation"
 frame = 38
 frame_progress = 1.0
 
-[node name="Blob5" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blobs" type="Node" parent="."]
+
+[node name="Blob5" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(516, -162)
 
-[node name="Blob6" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blob6" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(633, -223)
 
-[node name="Blob7" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blob7" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(652, -237)
 
-[node name="Blob8" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blob8" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(669, -223)
 
-[node name="Blob" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blob" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(115, -66)
 
-[node name="Blob2" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blob2" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(137, -83)
 
-[node name="Blob3" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blob3" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(158, -65)
 
-[node name="Blob4" parent="." instance=ExtResource("45_oaba0")]
+[node name="Blob4" parent="Blobs" instance=ExtResource("45_oaba0")]
 position = Vector2(361, -112)
+
+[node name="Blob9" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1018, -220)
+
+[node name="Blob10" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1039, -220)
+
+[node name="Blob11" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1064, -220)
+
+[node name="Blob12" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1017, -191)
+
+[node name="Blob13" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1040, -193)
+
+[node name="Blob14" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1060, -193)
+
+[node name="Blob15" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1027, -205)
+
+[node name="Blob16" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1050, -206)
+
+[node name="Blob17" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1071, -206)
+
+[node name="Blob18" parent="Blobs" instance=ExtResource("45_oaba0")]
+position = Vector2(1007, -205)
+
+[node name="StaticPlatforms" type="Node" parent="."]
+
+[node name="Platform" parent="StaticPlatforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(488, -120)
+
+[node name="Platform4" parent="StaticPlatforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(544, -96)
+
+[node name="Platform5" parent="StaticPlatforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(552, -152)
+
+[node name="Platform6" parent="StaticPlatforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(616, -176)
+
+[node name="MovingPlatforms" type="Node" parent="."]
+
+[node name="Platform2" parent="MovingPlatforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(256, -56)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform2"]
+libraries = {
+&"": SubResource("AnimationLibrary_u5sy4")
+}
+autoplay = "move"
+speed_scale = 0.712
+
+[node name="Platform3" parent="MovingPlatforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(440, -56)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatforms/Platform3"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_iywne")
+}
+autoplay = "move"
+
+[node name="Tooltips" type="Node" parent="."]
+
+[node name="Tutorial" type="Label" parent="Tooltips"]
+offset_left = -139.0
+offset_top = 27.0
+offset_right = 51.0
+offset_bottom = 50.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("46_458eo")
+theme_override_font_sizes/font_size = 8
+text = "WASD or Arrow Keys to move
+escape the spill!"
+
+[node name="fallinghurts" type="Label" parent="Tooltips"]
+offset_left = 441.0
+offset_top = 35.0
+offset_right = 631.0
+offset_bottom = 58.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("46_458eo")
+theme_override_font_sizes/font_size = 8
+text = "falling hurts..."
+
+[node name="youdidit" type="Label" parent="Tooltips"]
+offset_left = 1141.0
+offset_top = -217.0
+offset_right = 1331.0
+offset_bottom = -194.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("46_458eo")
+theme_override_font_sizes/font_size = 8
+text = "you did it!"
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("48_fedci")
+autoplay = true
+bus = &"Music"
+
+[node name="Img0193" type="Sprite2D" parent="."]
+position = Vector2(1405, 11)
+scale = Vector2(0.148298, 0.175159)
+texture = ExtResource("49_8qswn")
 
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
 [connection signal="animation_finished" from="CanvasLayer/RespawnAnimation" to="Player" method="_on_respawn_animation_finished"]
