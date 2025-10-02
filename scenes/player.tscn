@@ -283,8 +283,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_j2b1d"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 6.0
+height = 19.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 5
@@ -297,5 +298,5 @@ animation = &"death"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
-shape = SubResource("CircleShape2D_j2b1d")
+position = Vector2(0, -9.5)
+shape = SubResource("CapsuleShape2D_g2els")
