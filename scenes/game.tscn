@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://7krqqipspjps"]
+[gd_scene load_steps=59 format=4 uid="uid://7krqqipspjps"]
 
 [ext_resource type="PackedScene" uid="uid://v1u6u7416ydt" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://boydp8ody8iec" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
@@ -48,7 +48,6 @@
 [ext_resource type="PackedScene" uid="uid://cpualcehd2a81" path="res://scenes/blob.tscn" id="45_oaba0"]
 [ext_resource type="FontFile" uid="uid://drifrp7tqglk2" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="46_458eo"]
 [ext_resource type="AudioStream" uid="uid://bssscdgbug323" path="res://assets/music/time_for_adventure.mp3" id="48_fedci"]
-[ext_resource type="Texture2D" uid="uid://du3ikk7egpvey" path="res://assets/images/IMG_0193.JPG" id="49_8qswn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -606,11 +605,6 @@ text = "you did it!"
 stream = ExtResource("48_fedci")
 autoplay = true
 bus = &"Music"
-
-[node name="Img0193" type="Sprite2D" parent="."]
-position = Vector2(1405, 11)
-scale = Vector2(0.148298, 0.175159)
-texture = ExtResource("49_8qswn")
 
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
 [connection signal="animation_finished" from="CanvasLayer/RespawnAnimation" to="Player" method="_on_respawn_animation_finished"]
