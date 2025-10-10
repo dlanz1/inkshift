@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://7krqqipspjps"]
+[gd_scene load_steps=61 format=4 uid="uid://7krqqipspjps"]
 
 [ext_resource type="PackedScene" uid="uid://v1u6u7416ydt" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://boydp8ody8iec" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
@@ -47,7 +47,8 @@
 [ext_resource type="Script" uid="uid://cdci4466x0w0b" path="res://scenes/game.gd" id="44_cdci4"]
 [ext_resource type="PackedScene" uid="uid://cpualcehd2a81" path="res://scenes/blob.tscn" id="45_oaba0"]
 [ext_resource type="FontFile" uid="uid://drifrp7tqglk2" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="46_458eo"]
-[ext_resource type="AudioStream" uid="uid://bssscdgbug323" path="res://assets/music/time_for_adventure.mp3" id="48_fedci"]
+[ext_resource type="AudioStream" uid="uid://quukvi8le4wq" path="res://assets/music/duncanbackground.mp3" id="49_8qswn"]
+[ext_resource type="Script" uid="uid://bhmmp5j4uv0l6" path="res://scenes/ink_spill.gd" id="49_dgbpr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("1_yqjtg")
@@ -212,6 +213,9 @@ texture = ExtResource("1_yqjtg")
 [sub_resource type="TileSet" id="TileSet_lbhrr"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_lnu2h")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgbpr"]
+size = Vector2(32, 720)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
 distance = -176.0
@@ -425,10 +429,10 @@ unique_name_in_owner = true
 script = ExtResource("2_h3rex")
 
 [node name="ChargeLabel" type="Label" parent="GameManager"]
-offset_left = 1141.0
-offset_top = -201.0
-offset_right = 1331.0
-offset_bottom = -178.0
+offset_left = 1232.0
+offset_top = -202.0
+offset_right = 1422.0
+offset_bottom = -179.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("46_458eo")
 theme_override_font_sizes/font_size = 8
@@ -460,6 +464,20 @@ texture = ExtResource("4_lbhrr")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(0, -8)
+
+[node name="InkSpill" type="Area2D" parent="."]
+z_index = 100
+z_as_relative = false
+position = Vector2(-640, 0)
+script = ExtResource("49_dgbpr")
+player_path = NodePath("../Player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InkSpill"]
+shape = SubResource("RectangleShape2D_dgbpr")
+
+[node name="Polygon2D" type="Polygon2D" parent="InkSpill"]
+z_index = 100
+color = Color(0.0705882, 0.0196078, 0.121569, 0.972549)
 
 [node name="KillZone" type="Area2D" parent="."]
 position = Vector2(0, -8)
@@ -592,20 +610,21 @@ theme_override_font_sizes/font_size = 8
 text = "falling hurts..."
 
 [node name="youdidit" type="Label" parent="Tooltips"]
-offset_left = 1141.0
-offset_top = -217.0
-offset_right = 1331.0
-offset_bottom = -194.0
+offset_left = 1232.0
+offset_top = -216.0
+offset_right = 1422.0
+offset_bottom = -193.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("46_458eo")
 theme_override_font_sizes/font_size = 8
 text = "you did it!"
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("48_fedci")
+stream = ExtResource("49_8qswn")
 autoplay = true
 bus = &"Music"
 
+[connection signal="respawn_started" from="Player" to="InkSpill" method="_on_player_respawn_started"]
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
 [connection signal="animation_finished" from="CanvasLayer/RespawnAnimation" to="Player" method="_on_respawn_animation_finished"]
 [connection signal="frame_changed" from="CanvasLayer/RespawnAnimation" to="Player" method="_on_respawn_animation_frame_changed"]
