@@ -3,7 +3,7 @@ extends Area2D
 @export var expansion_speed: float = 40.0
 @export var start_width: float = 32.0
 @export var max_width: float = 1800.0
-@export var spill_height: float = 720.0
+@export var spill_height: float = 1000.0
 @export var vertical_offset: float = 0.0
 @export_node_path("CharacterBody2D") var player_path: NodePath
 
