@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var expansion_speed: float = 40.0
+@export var expansion_speed: float = 80.0
 @export var start_width: float = 32.0
 @export var max_width: float = 1800.0
 @export var spill_height: float = 1000.0

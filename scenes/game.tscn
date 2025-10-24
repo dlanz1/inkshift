@@ -623,6 +623,7 @@ text = "you did it!"
 stream = ExtResource("49_8qswn")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
 
 [connection signal="respawn_started" from="Player" to="InkSpill" method="_on_player_respawn_started"]
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
