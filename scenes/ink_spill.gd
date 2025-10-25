@@ -46,7 +46,7 @@ func _set_width(width: float) -> void:
 	_update_polygon()
 
 func _on_player_respawn_started() -> void:
-	reset_spill()
+	pass
 
 func _on_body_entered(body: Node) -> void:
 	if player and body == player:

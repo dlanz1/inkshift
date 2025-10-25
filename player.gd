@@ -8,6 +8,9 @@ const JUMP_VELOCITY = -255.0
 
 @onready var sprite = $AnimatedSprite2D
 @export var respawn_animation: AnimatedSprite2D
+@export_node_path("Area2D") var ink_spill_path: NodePath
+
+@onready var ink_spill: Area2D = get_node_or_null(ink_spill_path) as Area2D
 
 var spawn_position: Vector2
 
@@ -50,7 +53,6 @@ func respawn() -> void:
 		respawn_animation.global_position = screen_size / 2.0
 		respawn_animation.visible = true
 		respawn_animation.play("RespawnAnimation")
-		self.hide()
 
 func _on_respawn_animation_finished() -> void:
 	print("Animation finished.")
@@ -68,4 +70,7 @@ func _on_respawn_animation_frame_changed() -> void:
 		print("Teleport frame " + str(teleport_frame) + " reached. Moving player.")
 		global_position = spawn_position
 		velocity = Vector2.ZERO
+		# Ensure the ink spill resets once the player teleports back in.
+		if ink_spill and ink_spill.has_method("reset_spill"):
+			ink_spill.reset_spill()
 		self.show()

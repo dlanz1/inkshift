@@ -446,6 +446,7 @@ tile_set = SubResource("TileSet_lbhrr")
 
 [node name="Player" parent="." node_paths=PackedStringArray("respawn_animation") instance=ExtResource("1_uwrxv")]
 respawn_animation = NodePath("../CanvasLayer/RespawnAnimation")
+ink_spill_path = NodePath("../InkSpill")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -41)

@@ -24,6 +24,13 @@ func _on_body_entered(_body: Node2D) -> void:
 
 func respawn() -> void:
 	global_position = _spawn_position
+	# Drive the AnimationPlayer back to its default state before showing the blob again.
+	if animation_player:
+		animation_player.call_deferred("play", "RESET")
+	call_deferred("_finish_respawn")
+
+
+func _finish_respawn() -> void:
 	_set_active(true)
 
 

@@ -10,6 +10,7 @@ func _ready() -> void:
 
 func _on_player_respawn_started() -> void:
 	_respawn_blobs()
+	_reset_charge()
 
 
 func _respawn_blobs() -> void:
@@ -17,3 +18,10 @@ func _respawn_blobs() -> void:
 	for blob in blobs:
 		if blob.has_method("respawn"):
 			blob.respawn()
+
+
+func _reset_charge() -> void:
+	if get_tree():
+		var manager := get_tree().get_first_node_in_group("game_manager")
+		if manager and manager.has_method("reset_charge"):
+			manager.reset_charge()
